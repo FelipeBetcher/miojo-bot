@@ -144,7 +144,7 @@ bot.on("message", function(message) {
         case "ajuda":
             message.channel.send(new Discord.RichEmbed()
             .setColor(0xf7ed31)
-            .setTitle("Lista de comandos envida no privado")
+            .setTitle("Lista de comandos enviada no privado")
             .setAuthor("m!ajuda", "https://images-ext-1.discordapp.net/external/TBdknEe5W9Jz2fzWrkBU1PFI1pQrjcM9pL1gqgbgE7Y/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/431244678583549952/8347da5b120a86d8aa39571bdbe29cce.png?width=531&height=531")
             .setFooter("Comando ultilizado por " + message.author.tag)).then(msg => msg.delete(5000));
             message.react("✉")
@@ -152,7 +152,7 @@ bot.on("message", function(message) {
             .setColor(hex)
             .setTitle("PREFIXO: m!")
             .setAuthor("Comandos do Miojo", "https://images-ext-1.discordapp.net/external/TBdknEe5W9Jz2fzWrkBU1PFI1pQrjcM9pL1gqgbgE7Y/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/431244678583549952/8347da5b120a86d8aa39571bdbe29cce.png?width=531&height=531")
-            .setDescription("\n\n**ajuda** - envia os comandos do Miojo no privado\n\n**fale** - repete o que você escreve\n\n**vote** - cria um embed e adiciona a reação: ✅ e ❎. E depois falao resultado\n\n**pergunta** - responde a sua pergunta com: sim, não ou talvez\n\n**ping** - mostra seu ms\n\n**moeda** - reage a sua mensagem com:👑 ou 😃\n\n**sorteio** - um numero aleatório entre 1 e o número que você escolheu")
+            .setDescription("\n\n**ajuda** - envia os comandos do Miojo no privado\n\n**fale** - repete o que você escreve\n\n**vote** - cria um embed e adiciona a reação: ✅ e ❎. E depois fala o resultado\n\n**pergunta** - responde a sua pergunta com: sim, não ou talvez\n\n**ping** - mostra seu ms\n\n**moeda** - reage a sua mensagem com:👑 ou 😃\n\n**sorteio** - um numero aleatório entre 1 e o número que você escolheu")
             .setFooter("Criado por BTR#6986")
             message.author.send({embed});
             break;
