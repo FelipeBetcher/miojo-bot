@@ -66,6 +66,7 @@ bot.on('ready', () => {
 }}})*/
 
 bot.on('message', async message => {
+    const prefixo = "m!"
     var args = message.content.substring(prefixo.length).split(" ");
     const lider = message.author.id === "412582853834965003"
 
