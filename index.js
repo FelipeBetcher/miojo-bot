@@ -76,14 +76,14 @@ bot.on('message', async message => {
         bot.user.setActivity(lama, { type: 'PLAYING' })
         message.channel.send(new Discord.RichEmbed()
         .setColor(0x48d11f)
-        .setAuthor("2!sa", message.author.avatarURL)
+        .setAuthor("m!sa", message.author.avatarURL)
         .setTitle("Atividade alterada para: Jogando " + lama)
         .setFooter(message.author.username + " meu líder"))
         }
         if(!lider){
             message.channel.send(new Discord.RichEmbed()
             .setColor(0xcc2020)
-            .setAuthor("2!sa", message.author.avatarURL)
+            .setAuthor("m!sa", message.author.avatarURL)
             .setTitle("Você não tem permissão para este comando")
             .setFooter(message.author.username + " bobinho"))
         }}
@@ -94,14 +94,14 @@ bot.on('message', async message => {
         bot.user.setActivity(lama, { type: 'LISTENING' })
         message.channel.send(new Discord.RichEmbed()
         .setColor(0x48d11f)
-        .setAuthor("2!sa", message.author.avatarURL)
+        .setAuthor("m!sa", message.author.avatarURL)
         .setTitle("Atividade alterada para: Ouvindo " + lama)
         .setFooter(message.author.username + " meu líder"))
         }
         if(!lider){
             message.channel.send(new Discord.RichEmbed()
             .setColor(0xcc2020)
-            .setAuthor("2!sa", message.author.avatarURL)
+            .setAuthor("m!sa", message.author.avatarURL)
             .setTitle("Você não tem permissão para este comando")
             .setFooter(message.author.username + " bobinho"))
         }}
@@ -112,14 +112,14 @@ bot.on('message', async message => {
         bot.user.setActivity(lama, { type: 'WATCHING' })
         message.channel.send(new Discord.RichEmbed()
         .setColor(0x48d11f)
-        .setAuthor("2!sa", message.author.avatarURL)
+        .setAuthor("m!sa", message.author.avatarURL)
         .setTitle("Atividade alterada para: Assistindo " + lama)
         .setFooter(message.author.username + " meu líder"))
         }
         if(!lider){
             message.channel.send(new Discord.RichEmbed()
             .setColor(0xcc2020)
-            .setAuthor("2!sa", message.author.avatarURL)
+            .setAuthor("m!sa", message.author.avatarURL)
             .setTitle("Você não tem permissão para este comando")
             .setFooter(message.author.username + " bobinho"))
         }}
