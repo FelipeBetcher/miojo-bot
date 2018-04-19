@@ -204,7 +204,7 @@ bot.on("message", function(message) {
     const lider = message.author.id === "412582853834965003"
 
     switch (args[0].toLowerCase()) {
-        case "info"
+        case "info":
             message.channel.send("**EM DESENVOLVIMENTO**, server para suporte:https://discord.gg/XN6Uhxf")
             break;
         case "ajuda":
