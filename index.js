@@ -86,6 +86,13 @@ bot.on("message", message => {
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }
   }
+    if(!message.author.id !== "412582853834965003"){
+    message.channel.send(new Discord.RichEmbed()
+            .setColor(0xcc2020)
+            .setAuthor("m!eval", message.author.avatarURL)
+            .setTitle("Você não tem permissão para este comando")
+            .setFooter(message.author.username + " bobinho"))
+    }
 });
 
 bot.on('message', async message => {
@@ -246,6 +253,7 @@ bot.on("message", function(message) {
             .setDescription("\n\n**ajuda** - envia os comandos do Miojo no privado\n\n**fale** - repete o que você escreve\n\n**vote** - cria um embed e adiciona a reação: ✅ e ❎. E depois fala o resultado\n\n**pergunta** - responde a sua pergunta com: sim, não ou talvez\n\n**ping** - mostra seu ms\n\n**moeda** - reage a sua mensagem com:👑 ou 😃\n\n**sorteio** - um numero aleatório entre 1 e o número que você escolheu")
             .setFooter("Criado por BTR#6986")
             message.author.send({embed});
+            message.author.send("Discord para suporte: https://discord.gg/KqZmnKw")
             break;
         case "moeda":
             message.react(cara[Math.floor(Math.random() * cara.length)]);
