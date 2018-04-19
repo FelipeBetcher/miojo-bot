@@ -86,7 +86,7 @@ bot.on("message", message => {
       message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
     }
   }
-    if(!message.author.id !== "412582853834965003"){
+    if(!message.author.id === "412582853834965003"){
     message.channel.send(new Discord.RichEmbed()
             .setColor(0xcc2020)
             .setAuthor("m!eval", message.author.avatarURL)
