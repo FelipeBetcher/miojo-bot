@@ -30,41 +30,6 @@ bot.on('ready', () => {
     message.channeli.send(`Seja bem-vindo ao servidor **${member.user.username}**`)
 })*/
 
-/*bot.on('message', message => {
-    if (message.content.startsWith(PREFIX + "setstatus")){
-    const lider = message.author.id === "412582853834965003"
-    if (lider){
-    const irin = message.content.split(" ").join(" ").slice(12);
-    if (irin === 1)
-    bot.user.setStatus('online')
-    .setColor(0x48d11f)
-    .setAuthor("m!setstatus", "https://images-ext-1.discordapp.net/external/TBdknEe5W9Jz2fzWrkBU1PFI1pQrjcM9pL1gqgbgE7Y/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/431244678583549952/8347da5b120a86d8aa39571bdbe29cce.png?width=531&height=531")
-    .setTitle("Status mudado para: 💚 online")
-    .setFooter("Comando ultilizado por " + message.author.tag)
-    if (irin === 2)
-    bot.user.setStatus('idle') 
-    .setColor(0x48d11f)
-    .setAuthor("m!setstatus", "https://images-ext-1.discordapp.net/external/TBdknEe5W9Jz2fzWrkBU1PFI1pQrjcM9pL1gqgbgE7Y/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/431244678583549952/8347da5b120a86d8aa39571bdbe29cce.png?width=531&height=531")
-    .setTitle("Status mudado para: 💛 ausente")
-    .setFooter("Comando ultilizado por " + message.author.tag)
-    if (irin === 3)
-    bot.user.setStatus('dnd') 
-    message.channel.send(new Discord.RichEmbed()
-    .setColor(0x48d11f)
-    .setAuthor("m!setstatus", "https://images-ext-1.discordapp.net/external/TBdknEe5W9Jz2fzWrkBU1PFI1pQrjcM9pL1gqgbgE7Y/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/431244678583549952/8347da5b120a86d8aa39571bdbe29cce.png?width=531&height=531")
-    .setTitle("Status mudado para: ❤️ não pertube")
-    .setFooter("Comando ultilizado por " + message.author.tag)
-    )
-    }
-    if (!lider){
-    message.channel.send(new Discord.RichEmbed()
-    .setColor(0xcc2020)
-    .setAuthor("m!setstatus", "https://images-ext-1.discordapp.net/external/TBdknEe5W9Jz2fzWrkBU1PFI1pQrjcM9pL1gqgbgE7Y/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/431244678583549952/8347da5b120a86d8aa39571bdbe29cce.png?width=531&height=531")
-    .setTitle("Você não tem permissão para ultilizar esse comando")
-    .setFooter("Comando ultilizado por " + message.author.tag)
-    )    
-}}})*/
-
 const clean = text => {
   if (typeof(text) === "string")
     return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
@@ -239,6 +204,8 @@ bot.on("message", function(message) {
     const lider = message.author.id === "412582853834965003"
 
     switch (args[0].toLowerCase()) {
+        case "info"
+            message.channel.send("**EM DESENVOLVIMENTO**, server para suporte:https://discord.gg/XN6Uhxf")
         case "ajuda":
             message.channel.send(new Discord.RichEmbed()
             .setColor(0xf7ed31)
@@ -251,7 +218,7 @@ bot.on("message", function(message) {
             .setTitle("PREFIXO: m!")
             .setAuthor("Comandos do Miojo", "https://images-ext-1.discordapp.net/external/TBdknEe5W9Jz2fzWrkBU1PFI1pQrjcM9pL1gqgbgE7Y/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/431244678583549952/8347da5b120a86d8aa39571bdbe29cce.png?width=531&height=531")
             .setDescription("\n\n**ajuda** - envia os comandos do Miojo no privado\n\n**fale** - repete o que você escreve\n\n**vote** - cria um embed e adiciona a reação: ✅ e ❎. E depois fala o resultado\n\n**pergunta** - responde a sua pergunta com: sim, não ou talvez\n\n**ping** - mostra seu ms\n\n**moeda** - reage a sua mensagem com:👑 ou 😃\n\n**sorteio** - um numero aleatório entre 1 e o número que você escolheu")
-            .setFooter("Criado por BTR#6986")
+            .setFooter("Criado por BTR#0001")
             message.author.send({embed});
             message.author.send("Discord para suporte: https://discord.gg/XN6Uhxf")
             break;
