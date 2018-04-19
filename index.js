@@ -206,6 +206,7 @@ bot.on("message", function(message) {
     switch (args[0].toLowerCase()) {
         case "info"
             message.channel.send("**EM DESENVOLVIMENTO**, server para suporte:https://discord.gg/XN6Uhxf")
+            break;
         case "ajuda":
             message.channel.send(new Discord.RichEmbed()
             .setColor(0xf7ed31)
