@@ -23,7 +23,7 @@ bot.on("guildMemberRemove", mem => {
 })
 
 bot.on('message', async message => {
-    if(message.channel.type == "dm") return;
+        if(message.channel.type == "dm") return;
     if(message.author.bot) return;
 
     const registro = bot.channels.get("460922518560309249")
@@ -86,9 +86,6 @@ bot.on('message', async message => {
         if(!isNaN(message.content.slice(8)) && !message.content.slice(8) < 1) {
           var b = parseFloat(message.content.slice(8)).toFixed(0)
           if(b > 99) {
-            b = 99
-          }
-            if(b > 99) {
             b = 99
           }
           b++
@@ -182,7 +179,7 @@ bot.on('message', async message => {
     if(!message.member.roles.map(e => e.id).includes("460550113773879317")) {
       if(message.member.hasPermission("ADMINISTRATOR")) return;
           var oi = {}
-          var a = message.content.toLocaleLowerCase()
+          var a = message.content.toLowerCase()
 
           for(var i = 0; i < a.length; i++) {
           var letra = a.split("")[i]
@@ -221,7 +218,7 @@ bot.on('message', async message => {
 
         var re =  /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi.exec(message.cleanContent);
         if(re != null){
-          raz.push("convite")
+          raz.push("link")
         }
 
         if(message.content.length > 256){
@@ -232,15 +229,21 @@ bot.on('message', async message => {
           raz.push("muitos caracteres iguais")
         }
 
-        if((t.length > 0) || (ii > 10) || (message.content.toLowerCase().indexOf("discord.gg") > -1) || (message.content.length > 256)){
+        if((t.length > 0) || (ii > 10) || (re != null) || (message.content.length > 256)){
+          function oi(){
+          raz[0] = raz[0].slice(0,1).toUpperCase()+raz[0].slice(1,raz[0].length)
+          if(raz.length === 1) return raz
+          raz = [raz.slice(0,raz.length-1).join(", "), raz.slice(raz.length-1,raz.length)]
+          return raz
+          }
           registro.send(new Discord.RichEmbed()
           .setColor(message.guild.members.get(bot.user.id).highestRole.hexColor)
           .setAuthor(message.author.tag, message.author.avatarURL)
           .setDescription("**Mensagem enviada por " + message.author + " deletada em " + message.channel + "**")
-          .addField("Razão", raz.join(", ").slice(0,1).toUpperCase()+raz.join(", ").slice(1,raz.join(", ").length))
+          .addField("Razão", oi().join(" e "))
           .setFooter("ID: " + message.author.id)
-          .setTimestamp())
-          message.delete()
+          .setTimestamp()).catch()
+          message.delete(300)
         }
     }
 
