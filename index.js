@@ -83,7 +83,7 @@ bot.on('message', async message => {
         message.delete()
       }
       if(message.content.slice(8)) {
-        if(!isNaN(message.content.slice(8)) && message.content.slice(8) >= 1) {
+        if(!isNaN(message.content.slice(8)) && !message.content.slice(8) < 1) {
           var b = parseFloat(message.content.slice(8)).toFixed(0)
           if(b > 99) {
             b = 99
