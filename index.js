@@ -1,303 +1,171 @@
 const Discord = require("discord.js");
-const PREFIX = "m!";
+var bot = new Discord.Client();
 
-var bot = new Discord.Client(); 
-var hex = '#'+Math.floor(Math.random()*16777215).toString(16);
-var fortunes = [
-    "Sim",
-    "Não",
-    "Talvez",
-];
-var cara = [
-    "👑",
-    "😃"
-];
-var teste = [
-    "https://cdn.discordapp.com/attachments/432150862190739458/432643557472600076/jpg.jpg",
-    "https://cdn.discordapp.com/attachments/432150862190739458/432643581283532812/download.jpg",
-    "https://cdn.discordapp.com/attachments/432150862190739458/432643607040753694/download.png",
-    "https://cdn.discordapp.com/attachments/432150862190739458/432643650447474688/chip.jpg"
-];
-
-bot.on('ready', () => {
-    console.log("-------------Miojo-------------")
-    console.log("          esta online")
-    bot.user.setStatus('dnd') 
-});
-
-/*bot.on('guildMemberAdd', member => {
-    const channeli = member.guild.channels.find('id', '425865939691765760');
-    message.channeli.send(`Seja bem-vindo ao servidor **${member.user.username}**`)
-})*/
-
-const clean = text => {
-  if (typeof(text) === "string")
-    return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
-  else
-      return text;
-}
-
-bot.on("message", message => {
-  const args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(PREFIX + "eval")) {
-    if(message.author.id !== "412582853834965003") return;
-    try {
-      const code = args.join(" ");
-      let evaled = eval(code);
-      if (typeof evaled !== "string")
-        evaled = require("util").inspect(evaled);
-      message.channel.send(clean(evaled), {code:"xl"});
-    } catch (err) {
-      message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
-    }
-  }
-    if(!message.author.id === "412582853834965003"){
-    message.channel.send(new Discord.RichEmbed()
-            .setColor(0xcc2020)
-            .setAuthor("m!eval", message.author.avatarURL)
-            .setTitle("Você não tem permissão para este comando")
-            .setFooter(message.author.username + " bobinho"))
-    }
-});
-
-bot.on('message', async message => {
-    const prefixo = "m!"
-    var args = message.content.substring(prefixo.length).split(" ");
-    const lider = message.author.id === "412582853834965003"
-
-        if(message.content.startsWith(prefixo + "sa 1")){
-        if(lider){
-        const lama = message.content.split(" ").join(" ").slice(7);
-        bot.user.setActivity(lama, { type: 'PLAYING' })
-        message.channel.send(new Discord.RichEmbed()
-        .setColor(0x48d11f)
-        .setAuthor("m!sa", message.author.avatarURL)
-        .setTitle("Atividade alterada para: Jogando " + lama)
-        .setFooter(message.author.username + " meu líder"))
-        }
-        if(!lider){
-            message.channel.send(new Discord.RichEmbed()
-            .setColor(0xcc2020)
-            .setAuthor("m!sa", message.author.avatarURL)
-            .setTitle("Você não tem permissão para este comando")
-            .setFooter(message.author.username + " bobinho"))
-        }}
-
-        if(message.content.startsWith(prefixo + "sa 2")){
-        if(lider){
-        const lama = message.content.split(" ").join(" ").slice(7);
-        bot.user.setActivity(lama, { type: 'LISTENING' })
-        message.channel.send(new Discord.RichEmbed()
-        .setColor(0x48d11f)
-        .setAuthor("m!sa", message.author.avatarURL)
-        .setTitle("Atividade alterada para: Ouvindo " + lama)
-        .setFooter(message.author.username + " meu líder"))
-        }
-        if(!lider){
-            message.channel.send(new Discord.RichEmbed()
-            .setColor(0xcc2020)
-            .setAuthor("m!sa", message.author.avatarURL)
-            .setTitle("Você não tem permissão para este comando")
-            .setFooter(message.author.username + " bobinho"))
-        }}
-
-        if(message.content.startsWith(prefixo + "sa 3")){
-        if(lider){
-        const lama = message.content.split(" ").join(" ").slice(7);
-        bot.user.setActivity(lama, { type: 'WATCHING' })
-        message.channel.send(new Discord.RichEmbed()
-        .setColor(0x48d11f)
-        .setAuthor("m!sa", message.author.avatarURL)
-        .setTitle("Atividade alterada para: Assistindo " + lama)
-        .setFooter(message.author.username + " meu líder"))
-        }
-        if(!lider){
-            message.channel.send(new Discord.RichEmbed()
-            .setColor(0xcc2020)
-            .setAuthor("m!sa", message.author.avatarURL)
-            .setTitle("Você não tem permissão para este comando")
-            .setFooter(message.author.username + " bobinho"))
-        }}
-
-        if(message.content.startsWith("eu sou gay?")){
-            if (lider) { message.channel.send("Não")}
-            if (!lider) { message.channel.send("Sim")}}
-
-/*PLAYING
-STREAMING
-LISTENING
-WATCHING*/
+bot.on("ready", () => {
+    console.log("Estou pronto!")
+    bot.user.setActivity('ou melhor xitando no R6', { type: 'PLAYING' })
+    bot.user.setStatus("dnd")
 })
 
-bot.on('message', message => {
-    if (message.content.startsWith(PREFIX + "setgame")){
-    const lider = message.author.id === "412582853834965003"
-    if (lider){
-    const irin = message.content.split(" ").join(" ").slice(10);
-    bot.user.setActivity(irin)
-    message.channel.send(new Discord.RichEmbed()
-    .setColor(0x48d11f)
-    .setAuthor("m!setgame", "https://images-ext-1.discordapp.net/external/TBdknEe5W9Jz2fzWrkBU1PFI1pQrjcM9pL1gqgbgE7Y/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/431244678583549952/8347da5b120a86d8aa39571bdbe29cce.png?width=531&height=531")
-    .setTitle("Jogo mudado para: " + irin)
-    //.setDescription("Jogando **" + irin +"**")
-    .setFooter("Comando ultilizado por " + message.author.tag)
-    )
-    }
-    if (!lider){
-    message.channel.send(new Discord.RichEmbed()
-    .setColor(0xcc2020)
-    .setAuthor("m!setgame", "https://images-ext-1.discordapp.net/external/TBdknEe5W9Jz2fzWrkBU1PFI1pQrjcM9pL1gqgbgE7Y/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/431244678583549952/8347da5b120a86d8aa39571bdbe29cce.png?width=531&height=531")
-    .setTitle("Você não tem permissão para ultilizar esse comando")
-    .setFooter("Comando ultilizado por " + message.author.tag)
-    )    
-}}})
+bot.on("guildMemberUpdate", mem => {
+    bot.channels.get("460888924357656615").setName("Membros VIPS: "+mem.guild.roles.get("460550113773879317").members.size)
+})
+
+bot.on("guildMemberAdd", mem => {
+    bot.channels.get("460893598427381798").setName("Membros totais: "+mem.guild.memberCount)
+    mem.addRole("460910412209061903")
+    bot.channels.get("460546789498421266").send(mem+" seja bem-vindo, olhe <#460546521256034309> para ter mais informações")
+})
+
+bot.on("guildMemberRemove", mem => {
+    bot.channels.get("460893598427381798").setName("Membros totais: "+mem.guild.memberCount)
+    bot.channels.get("460546789498421266").send(mem+" saiu do servidor")
+})
 
 bot.on('message', async message => {
-    if(message.content.startsWith(PREFIX + "ping")) {
-    message.react("🏓")
-    const m = await message.channel.send("🏓");
-    m.edit(new Discord.RichEmbed()
-    .setColor(0xf7ed31)
-    .setAuthor("m!ping", "https://images-ext-1.discordapp.net/external/TBdknEe5W9Jz2fzWrkBU1PFI1pQrjcM9pL1gqgbgE7Y/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/431244678583549952/8347da5b120a86d8aa39571bdbe29cce.png?width=531&height=531")
-    .setTitle(`Seu ping é de ${Date.now() - m.createdTimestamp} MS`)
-    .setFooter("Comando ultilizado por " + message.author.tag)
-    )
-    };
-    });
+    if(message.channel.type == "dm") return;
+    if(message.author.bot) return;
 
-bot.on('message', async message => {
-    if(message.content.startsWith(PREFIX + "vote")) {
-    const agree = "✅";
-    const disagre = "❎";
-    var n = 2;
-    var a = message.content.split(' ')
-    var first = a.slice(0, n).join(' ')
-    var second =  a.slice(n).join(' ')
-    var minu = first.slice(7)*1000
-    var embed = new Discord.RichEmbed()
-    .setColor(0xf7ed31)
-    .setAuthor("Votação de " + message.author.tag, message.author.avatarURL)
-    .setDescription(second)
-    .setFooter("Vote utilizandos as reações")
+    const registro = bot.channels.get("460922518560309249")
 
-    let msg = await message.channel.send({embed});
-    await msg.react(agree);
-    await msg.react(disagre);
-    
-    const reactions = await msg.awaitReactions(reaction => reaction.emoji.name === agree || reaction.emoji.name === disagre, {time: minu});
-    message.channel.send(new Discord.RichEmbed()
-    .setColor(0xf7ed31)
-    .setAuthor("Votação de " + message.author.tag + " completa", message.author.avatarURL)
-    .setDescription(second + `\n\n${agree}: ${reactions.get(agree).count-1}\n\n${disagre}: ${reactions.get(disagre).count-1}`)
-    .setFooter("A votação durou " + first.slice(7) + " segundos"))
+    if((message.content.toLowerCase() === "b!preco") || (message.content.toLowerCase() === "b!preço") || (message.content.toLowerCase() === "preço") || (message.content.toLowerCase() === "preco")) {
+      message.author.send(new Discord.RichEmbed()
+      //.setTimestamp()
+      .setColor("#0CBF9D")
+      .setTitle("BOOST")
+      //.setImage("https://cdn.discordapp.com/attachments/460549914695434252/460976003351576576/image.png")
+      //.setFooter(bot.users.get("412582853834965003").username, bot.users.get("412582853834965003").avatarURL)
+      .setDescription("**AVISO**\nO preço varia de acordo com os pontos que está ganhando por partida.\n\n**Pagamento**\nPara comprar fale com <@412582853834965003>.\nPagamento via Mercado Pago ou GiftCard Steam.\n⠀")
+      .addField("Lista de preços","MD10 → diamante\nPlatina → diamante\nOuro → diamante\nPrata → diamante\nBronze → diamante\nCobre → diamante",true)
+      .addField("BRL","R$ 60,00\nR$ 50,00\nR$ 70,00\nR$ 80,00\nR$ 110,00\nR$ 140,00",true))
+
+      message.author.send(new Discord.RichEmbed()
+      .setTimestamp()
+      .setColor("#0CBF9D")
+      .setTitle("MACRO")
+      .setImage("https://cdn.discordapp.com/attachments/460549914695434252/460976003351576576/image.png")
+      .setFooter(bot.users.get("412582853834965003").username, bot.users.get("412582853834965003").avatarURL)
+      .setDescription("**Pagamento**\nPara comprar fale com <@412582853834965003>.\nPagamento via Mercado Pago ou GiftCard Steam.\n\n**Promoção**\nCaso divulgue o macro para 3 pessoas e os mesmos comprarem você ganha o macro de graça.\n⠀"))
     }
-});
 
-bot.on("message", function(message) {
-    if (message.author.equals(bot.user)) return;
-
-    if (!message.content.startsWith(PREFIX)) return;
-
-    var args = message.content.substring(PREFIX.length).split(" ");
-
-    const boo = message.author.id === "374272831967592479"
-    const lider = message.author.id === "412582853834965003"
-
-    switch (args[0].toLowerCase()) {
-        case "info":
-            message.channel.send("**EM DESENVOLVIMENTO**, server para suporte:https://discord.gg/XN6Uhxf")
-            break;
-        case "ajuda":
-            message.channel.send(new Discord.RichEmbed()
-            .setColor(0xf7ed31)
-            .setTitle("Lista de comandos enviada no privado")
-            .setAuthor("m!ajuda", "https://images-ext-1.discordapp.net/external/TBdknEe5W9Jz2fzWrkBU1PFI1pQrjcM9pL1gqgbgE7Y/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/431244678583549952/8347da5b120a86d8aa39571bdbe29cce.png?width=531&height=531")
-            .setFooter("Comando ultilizado por " + message.author.tag)).then(msg => msg.delete(5000));
-            message.react("✉")
-            var embed = new Discord.RichEmbed()
-            .setColor(hex)
-            .setTitle("PREFIXO: m!")
-            .setAuthor("Comandos do Miojo", "https://images-ext-1.discordapp.net/external/TBdknEe5W9Jz2fzWrkBU1PFI1pQrjcM9pL1gqgbgE7Y/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/431244678583549952/8347da5b120a86d8aa39571bdbe29cce.png?width=531&height=531")
-            .setDescription("\n\n**ajuda** - envia os comandos do Miojo no privado\n\n**fale** - repete o que você escreve\n\n**vote** - cria um embed e adiciona a reação: ✅ e ❎. E depois fala o resultado\n\n**pergunta** - responde a sua pergunta com: sim, não ou talvez\n\n**ping** - mostra seu ms\n\n**moeda** - reage a sua mensagem com:👑 ou 😃\n\n**sorteio** - um numero aleatório entre 1 e o número que você escolheu")
-            .setFooter("Criado por BTR#0001")
-            message.author.send({embed});
-            message.author.send("Discord para suporte: https://discord.gg/XN6Uhxf")
-            break;
-        case "moeda":
-            message.react(cara[Math.floor(Math.random() * cara.length)]);
-            break;
-        case "image":
-            var embed = new Discord.RichEmbed()
-            .setColor(0xf7ed31)
-            .setImage(teste[Math.floor(Math.random() * teste.length)]);
-            message.channel.send({embed});
-            break;
-        case "oi":
-            const sallum = message.author.tag === "SALLUM#9767"
-            if (lider)
-            message.channel.send("Oi, meu líder");
-            if (boo)
-            message.channel.send("Põe ordem no cão");
-            if (sallum)
-            message.channel.send("Oi, sallum gay");
-            if (!lider && !boo && !sallum)
-            message.channel.send("Oi");
-            break;
-        case "sorteio":
-            const lama = message.content.split(" ").join(" ").slice(10)
-            if (args[1]) {
-            message.channel.send(new Discord.RichEmbed()
-            .setColor(0xf7ed31)
-            .setTitle(Math.floor(Math.random() * ((lama) - 1)) + 1))
-            } else {
-                var embed = new Discord.RichEmbed()
-                .setColor(0xf7ed31)
-                .setAuthor("m!sorteio", "https://images-ext-1.discordapp.net/external/TBdknEe5W9Jz2fzWrkBU1PFI1pQrjcM9pL1gqgbgE7Y/%3Fsize%3D2048/https/cdn.discordapp.com/avatars/431244678583549952/8347da5b120a86d8aa39571bdbe29cce.png?width=531&height=531")
-                .setTitle("Como usar?")
-                .setDescription("Basta colocar algum número na frente do comando")
-                .addField("Exemplo:","m!sorteio 10")
-                .setFooter("Ajudinha para " + message.author.tag)
-                message.channel.send({embed});
-            }
-            break;
-        case "color":
-                message.channel.send("Gerando cor").then(a => {
-                    setTimeout(function () {
-                        a.edit(`Gerando cor.`)
-                    }, 300)
-                    setTimeout(function () {
-                        a.edit(`Gerando cor..`)
-                    }, 1000)
-                    setTimeout(function () {
-                        a.edit(`Gerando cor...`)
-                    }, 1000)
-                    setTimeout(function () {
-                        a.edit(`Gerando cor....`)
-                    }, 1000)
-                    setTimeout(function () {
-                        a.edit('#'+Math.floor(Math.random()*16777215).toString(16))
-                    }, 1000)
-                })
-            break;
-        /*case "oi":
-            message.channel.send("0")
-            setInterval(function () {
-                message.channel.send(`${bot.message.get(Number).count+1}`)
-            }, 1000);
-            break;*/
-        case "fale":
-            const iri = message.content.split(" ").join(" ").slice(6);
-            if (args[1]) {message.channel.send(`${iri}`);}
-            else {message.channel.send("Escreva alguma coisa para eu dizer");}
-            break;
-        case "pergunta":
-            if (args[1]) message.channel.send(fortunes[Math.floor(Math.random() * fortunes.length)]);
-            else message.channel.send("Escreva alguma coisa pra eu responder"); 
-            break;
-        /*default:
-            message.reply("Comando inválido").then(msg => msg.delete(5000));
-            break;*/
+    if(message.content.toLowerCase().startsWith("b!boost")) {
+      if(message.author.id !== "412582853834965003") return;
+      function msg() {
+        if(!message.content.slice(8)) return "<@&460550113773879317> **Boost on**"
+        if(message.content.slice(8)) return "<@&460550113773879317> **Boost on:** " + message.content.slice(8)
+      }
+      message.delete()
+      message.channel.send(msg())
     }
-});
+
+    if(message.content.toLowerCase().startsWith("b!aviso")) {
+      if(!message.member.hasPermission("ADMINISTRATOR")) return;
+      if(!message.content.slice(8)) {
+        message.author.send("Escreva algo depois do `b!aviso`")
+      }
+      if(message.content.slice(8)) {
+        bot.channels.get("460917098860904453").send(new Discord.RichEmbed()
+        .setColor("#FFCC4D")
+        .setTitle("AVISO")
+        .setDescription(message.content.slice(8))
+        .setThumbnail("https://cdn.discordapp.com/attachments/460917098860904453/460919852744441866/26a0.png"))
+      }
+      message.delete()
+    }
+
+    if(message.content.startsWith("b!clear")) {
+      if(!message.member.hasPermission("MANAGE_MESSAGES")) return;
+      if(!message.content.slice(8)) {
+        message.channel.send(message.author + " digite um número").then(a => {
+          a.delete(3000)
+        })
+        message.delete()
+      }
+      if(message.content.slice(8)) {
+        if(!isNaN(message.content.slice(8))) {
+          var b = parseFloat(message.content.slice(8)).toFixed(0)
+          if(b > 100) {
+            b = 100
+          }
+          message.channel.bulkDelete(b)
+          message.channel.send(message.author + " " + b.toString() + " mensagens deletadas").then(a => {
+            a.delete(3000)
+          })
+        }
+        if(isNaN(message.content.slice(8))) {
+          message.channel.send(message.author + " digite um número").then(a => {
+            a.delete(3000)
+          })
+          message.delete()
+        }
+      }
+    }
+
+    if(!message.member.roles.map(e => e.id).includes("460550113773879317")) {
+      if(message.member.hasPermission("ADMINISTRATOR")) return;
+          var oi = {}
+          var a = message.content.toLocaleLowerCase()
+
+          for(var i = 0; i < a.length; i++) {
+          var letra = a.split("")[i]
+          if(!oi[letra]) {
+          oi[letra] = {
+            ve:
+            1
+          }
+          } else {
+          oi[letra] = {
+            ve:
+            oi[letra].ve + 1
+          }
+          }
+          }
+          var u = Object.values(oi)
+          var t = []
+          for(var i = 0; i < u.length; i++) {
+          var y = u[i].ve
+          if(y > 20) {
+          t.push(y)
+          }
+          }
+
+        var ii = 0
+        for(var i = 0; i < message.content.length; i++) {
+          var letra = message.content.split("")[i]
+          if(letra !== letra.toLowerCase()) {
+            ii++
+          }
+        }
+        var raz = []
+        if(ii > 10) {
+          raz.push("muitas letras maiúsculas")
+        }
+
+        var re =  /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi.exec(message.cleanContent);
+        if(re != null){
+          raz.push("convite")
+        }
+
+        if(message.content.length > 256){
+          raz.push("mais de 256 caracteres")
+        }
+
+        if(t.length > 0) {
+          raz.push("muitos caracteres iguais")
+        }
+
+        if((t.length > 0) || (ii > 10) || (message.content.toLowerCase().indexOf("discord.gg") > -1) || (message.content.length > 256)){
+          registro.send(new Discord.RichEmbed()
+          .setColor(message.guild.members.get(bot.user.id).highestRole.hexColor)
+          .setAuthor(message.author.tag, message.author.avatarURL)
+          .setDescription("**Mensagem enviada por " + message.author + " deletada em " + message.channel + "**")
+          .addField("razão", raz.join(", ").slice(0,1).toUpperCase()+raz.join(", ").slice(1,raz.join(", ").length))
+          .setFooter("ID: " + message.author.id)
+          .setTimestamp())
+          message.delete()
+        }
+    }
+
+})
 
 bot.login(process.env.BOT_TOKEN);
