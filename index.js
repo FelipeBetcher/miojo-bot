@@ -88,8 +88,12 @@ bot.on('message', async message => {
           if(b > 99) {
             b = 99
           }
-          message.channel.bulkDelete(b + 1)
-          message.reply((b+1).toString() + " mensagens deletadas").then(a => {
+            if(b > 99) {
+            b = 99
+          }
+          b++
+          message.channel.bulkDelete(b)
+          message.reply(b.toString() + " mensagens deletadas").then(a => {
             a.delete(3000)
           })
         } else {
