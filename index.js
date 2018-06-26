@@ -14,7 +14,7 @@ bot.on("guildMemberUpdate", mem => {
 bot.on("guildMemberAdd", mem => {
     bot.channels.get("460893598427381798").setName("Membros totais: "+mem.guild.memberCount)
     mem.addRole("460910412209061903")
-    bot.channels.get("460546789498421266").send(mem+" seja bem-vindo, olhe <#460546521256034309> para ter mais informações")
+    bot.channels.get("460546789498421266").send(mem+" seja bem-vindo, olhe <#460546521256034309> e <#460978980036804608> para ter mais informações")
 })
 
 bot.on("guildMemberRemove", mem => {
@@ -27,6 +27,7 @@ bot.on('message', async message => {
     if(message.author.bot) return;
 
     const registro = bot.channels.get("460922518560309249")
+    var cmd = message.content.split(" ")[0]
 
     if((message.content.toLowerCase() === "b!preco") || (message.content.toLowerCase() === "b!preço") || (message.content.toLowerCase() === "preço") || (message.content.toLowerCase() === "preco")) {
       message.author.send(new Discord.RichEmbed()
@@ -48,7 +49,7 @@ bot.on('message', async message => {
       .setDescription("**Pagamento**\nPara comprar fale com <@412582853834965003>.\nPagamento via Mercado Pago ou GiftCard Steam.\n\n**Promoção**\nCaso divulgue o macro para 3 pessoas e os mesmos comprarem você ganha o macro de graça.\n⠀"))
     }
 
-    if(message.content.toLowerCase().startsWith("b!boost")) {
+    if((cmd.toLowerCase() === "b!boost")) {
       if(message.author.id !== "412582853834965003") return;
       function msg() {
         if(!message.content.slice(8)) return "<@&460550113773879317> **Boost on**"
@@ -58,10 +59,10 @@ bot.on('message', async message => {
       message.channel.send(msg())
     }
 
-    if(message.content.toLowerCase().startsWith("b!aviso")) {
+    if((cmd.toLowerCase() === "b!aviso")) {
       if(!message.member.hasPermission("ADMINISTRATOR")) return;
       if(!message.content.slice(8)) {
-        message.author.send("Escreva algo depois do `b!aviso`")
+        message.author.send(message.author+", escreva algo depois do `b!aviso`")
       }
       if(message.content.slice(8)) {
         bot.channels.get("460917098860904453").send(new Discord.RichEmbed()
@@ -73,30 +74,103 @@ bot.on('message', async message => {
       message.delete()
     }
 
-    if(message.content.startsWith("b!clear")) {
+    if((cmd.toLowerCase() === "b!clear")) {
       if(!message.member.hasPermission("MANAGE_MESSAGES")) return;
       if(!message.content.slice(8)) {
-        message.channel.send(message.author + " digite um número").then(a => {
+        message.reply(message.author + " digite um número").then(a => {
           a.delete(3000)
         })
         message.delete()
       }
       if(message.content.slice(8)) {
-        if(!isNaN(message.content.slice(8))) {
+        if(!isNaN(message.content.slice(8)) && message.content.slice(8) >= 1) {
           var b = parseFloat(message.content.slice(8)).toFixed(0)
-          if(b > 100) {
-            b = 100
+          if(b > 99) {
+            b = 99
           }
-          message.channel.bulkDelete(b)
-          message.channel.send(message.author + " " + b.toString() + " mensagens deletadas").then(a => {
+          message.channel.bulkDelete(b + 1)
+          message.reply((b+1).toString() + " mensagens deletadas").then(a => {
             a.delete(3000)
           })
-        }
-        if(isNaN(message.content.slice(8))) {
-          message.channel.send(message.author + " digite um número").then(a => {
+        } else {
+          message.reply("digite um número maior que 0").then(a => {
             a.delete(3000)
           })
           message.delete()
+        }
+      }
+    }
+
+    if((cmd.toLowerCase() === "b!ban")) {
+      if(!message.member.hasPermission("BAN_MEMBERS")) return;
+        if(!message.mentions.members.first()) {
+           message.reply("mencione um usuário").then(msg => {
+             msg.delete(3000)
+           })
+           message.delete()
+        }
+        if(message.mentions.members.first()) {
+          if(!message.mentions.members.first().bannable) {
+            message.reply("esse membro não pode ser banido").then(msg => {
+              msg.delete(3000)
+            })
+            message.delete()
+          } else {
+          function msg() {
+            var y = message.content.indexOf(message.mentions.members.first())
+            var b = message.content.slice(y)
+            b = b.slice(b.split(" ")[0].length)
+            if(b) {
+              return b.slice(0,1).toUpperCase()+b.slice(1,b.length)
+            }
+              return "Razão não especificada"
+          }
+          registro.send(new Discord.RichEmbed()
+          .setColor(message.guild.members.get(bot.user.id).highestRole.hexColor)
+          .setAuthor(message.author.tag, message.author.avatarURL)
+          .setDescription(message.mentions.members.first() + " **banido por " + message.author + " em " + message.channel + "**")
+          .addField("Razão", msg())
+          .setFooter("ID: " + message.mentions.members.first().id)
+          .setTimestamp())
+          message.delete()
+          message.mentions.members.first().ban(msg())
+        }
+      }
+    }
+
+    if((cmd.toLowerCase() === "b!kick")) {
+      if(!message.member.hasPermission("KICK_MEMBERS")) return;
+        if(!message.mentions.members.first()) {
+           message.reply("mencione um usuário").then(msg => {
+             msg.delete(3000)
+           })
+           message.delete()
+        }
+        if(message.mentions.members.first()) {
+          if(!message.mentions.members.first().kickable) {
+            message.reply("esse membro não pode ser kickado").then(msg => {
+              msg.delete(3000)
+            })
+            message.delete()
+          } else {
+          function msg() {
+            var y = message.content.indexOf(message.mentions.members.first())
+            var b = message.content.slice(y)
+            b = b.slice(b.split(" ")[0].length)
+            if(b) {
+              return b.slice(0,1).toUpperCase()+b.slice(1,b.length)
+            }
+              return "Razão não especificada"
+          }
+          registro.send(new Discord.RichEmbed()
+          .setColor(message.guild.members.get(bot.user.id).highestRole.hexColor)
+          .setAuthor(message.author.tag, message.author.avatarURL)
+          .setDescription(message.mentions.members.first() + " **kickado por " + message.author + " em " + message.channel + "**")
+          .addField("Razão", msg())
+          .setFooter("ID: " + message.mentions.members.first().id)
+          .setTimestamp())
+          message.delete()
+          message.mentions.members.first().kick(msg())
         }
       }
     }
@@ -159,7 +233,7 @@ bot.on('message', async message => {
           .setColor(message.guild.members.get(bot.user.id).highestRole.hexColor)
           .setAuthor(message.author.tag, message.author.avatarURL)
           .setDescription("**Mensagem enviada por " + message.author + " deletada em " + message.channel + "**")
-          .addField("razão", raz.join(", ").slice(0,1).toUpperCase()+raz.join(", ").slice(1,raz.join(", ").length))
+          .addField("Razão", raz.join(", ").slice(0,1).toUpperCase()+raz.join(", ").slice(1,raz.join(", ").length))
           .setFooter("ID: " + message.author.id)
           .setTimestamp())
           message.delete()
